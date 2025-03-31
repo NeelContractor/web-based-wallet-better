@@ -128,14 +128,14 @@ const WalletGenerator = () => {
 
       if (pathType === "501") {
         // Solana
-        const { secretKey } = nacl.sign.keyPair.fromSeed(derivedSeed);
+        const { secretKey } = nacl.sign.keyPair.fromSeed(new Uint8Array(derivedSeed));
         const keypair = Keypair.fromSecretKey(secretKey);
 
         privateKeyEncoded = bs58.encode(secretKey);
         publicKeyEncoded = keypair.publicKey.toBase58();
       } else if (pathType === "60") {
         // Ethereum
-        const privateKey = Buffer.from(derivedSeed).toString("hex");
+        const privateKey = Buffer.from(new Uint8Array(derivedSeed)).toString("hex");
         privateKeyEncoded = privateKey;
 
         const wallet = new ethers.Wallet(privateKey);
@@ -236,7 +236,7 @@ const WalletGenerator = () => {
               >
                 <div className="flex flex-col gap-2">
                   <h1 className="tracking-tighter text-4xl md:text-5xl font-black">
-                    Kosh supports multiple blockchains
+                    Neel supports multiple blockchains
                   </h1>
                   <p className="text-primary/80 font-semibold text-lg md:text-xl">
                     Choose a blockchain to get started.
